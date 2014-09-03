@@ -1,0 +1,6 @@
+doc
+pkg
+tags
+*.gem
+.idea
+tmp
