@@ -2,7 +2,7 @@ module Serum
   module Rails
     class CodeScanner
 
-      DEFAULT_FOLDERS = %w[app lib config].freeze
+      DEFAULT_FOLDERS = %w[app lib config public].freeze
       ANYTHING = /.*/.freeze
 
       def initialize(root)

@@ -1,0 +1,79 @@
+// Utility mixins (methods) for SASS stylesheets.
+// origin: RM
+
+=icon_style
+  padding-left: 21px
+  background:
+    color: transparent
+    repeat: no-repeat
+    position: left center
+
+=icon($image_url)
+  +icon_style
+  background-image: url($image_url)
+
+=opacity($opacity)
+  filter: "alpha(opacity=#{$opacity * 100})"
+  -moz-opacity: $opacity
+  -khtml-opacity: $opacity
+  opacity: $opacity
+
+=round_corners($radius)
+  -moz-border-radius: $radius
+  -webkit-border-radius: $radius
+  border-radius: $radius
+
+=round_top_corners($radius)
+  +round_top_left_corner($radius)
+  +round_top_right_corner($radius)
+
+=round_top_left_corner($radius)
+  -moz-border-radius-topleft: $radius
+  -webkit-border-top-left-radius: $radius
+  border-top-left-radius: $radius
+
+=round_top_right_corner($radius)
+  -moz-border-radius-topright: $radius
+  -webkit-border-top-right-radius: $radius
+  border-top-right-radius: $radius
+
+=round_bottom_corners($radius)
+  +round_bottom_left_corner($radius)
+  +round_bottom_right_corner($radius)
+
+=round_bottom_left_corner($radius)
+  -moz-border-radius-bottomleft: $radius
+  -webkit-border-bottom-left-radius: $radius
+  border-bottom-left-radius: $radius
+
+=round_bottom_right_corner($radius)
+  -moz-border-radius-bottomright: $radius
+  -webkit-border-bottom-right-radius: $radius
+  border-bottom-right-radius: $radius
+
+=box_shadow($options)
+  -moz-box-shadow: $options
+  -webkit-box-shadow: $options
+  box-shadow: $options
+
+=hide_last_margin
+  >*:last-child
+    margin-bottom: 0 !important
+    >*:last-child
+      margin-bottom: 0 !important
+
+=gradient($first, $second)
+  background: $first * 0.5 + $second * 0.5
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr='#{$first}', endColorstr='#{$second}')
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$first}', endColorstr='#{$second}')"
+  background: -webkit-gradient(linear, left top, left bottom, from($first), to($second))
+  background: -moz-linear-gradient(top, $first, $second)
+
+=zero
+  height: 0
+  line-height: 0
+  font-size: 0
+
+=height($height)
+  height: $height
+  line-height: floor($height / 2) * 2

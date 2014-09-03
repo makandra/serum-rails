@@ -1,0 +1,30 @@
+-# The main application layout which is wrapped around every view.
+-# origin: RM
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "en", "http-equiv" => "Content-Language"}/
+    %meta{:'http-equiv' => 'X-UA-Compatible', :content => 'IE=EmulateIE7'}/
+    = csrf_meta_tag
+    %title= APPLICATION_TITLE
+    = render 'layouts/stylesheets'
+    = render 'layouts/javascripts'
+  %body{:id => yield(:body_id)}
+    #container
+      #head
+        #head_inner
+          .viewport
+            #site_name= link_to APPLICATION_TITLE, root_path
+            = render 'layouts/session_navigation'
+            = clear
+          = render 'layouts/notifications'
+          = render_navigation Navigation.main
+      = yield(:page_head)
+      = render 'layouts/flashes'
+      #main
+        #main_inner
+          #page
+            = yield
+      = render 'layouts/javascript_requirement'
+      

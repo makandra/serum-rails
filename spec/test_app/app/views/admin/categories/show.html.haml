@@ -1,0 +1,27 @@
+-# View to show a category as an admin.
+-# origin: M
+
+- page_head :title => icon(:category, @category.name), :navigation => Navigation.admin_category
+
+- buttons do
+  = link_to icon(:create, 'Add sub-category'), new_admin_category_path(:category => { :parent_id => object.id })
+
+%table
+  %tr
+    %th Name
+    %td= @category.name
+  %tr
+    %th Parent category
+    %td
+      - if @category.parent
+        = link_to(icon(:category, @category.parent.andand.name), [:admin, @category.parent])
+      - else
+        &ndash;
+  - if @category.children.any?
+    %tr
+      %th Sub-categories
+      %td
+        %ul
+          - for child in @category.children.sort
+            %li
+              = link_to(icon(:category, child.name), [:admin, child])

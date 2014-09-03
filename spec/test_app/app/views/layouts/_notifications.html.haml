@@ -1,0 +1,11 @@
+-# Partial to display notifications for outstanding invitations and friendship requests to the signed in user
+-# origin: M
+ 
+#notifications
+  #notifications_inner
+    - invitation_count = current_user.received_invitations.count
+    - if invitation_count > 0
+      = link_to icon(:email, pluralize(invitation_count, 'invitation', 'invitations')), invitations_path, :class => 'notification'
+    - friendship_request_count = current_user.friendship_requests.count
+    - if friendship_request_count > 0
+      = link_to icon(:email, pluralize(friendship_request_count, 'contact request', 'contact requests')), current_user, :class => 'notification'

@@ -1,0 +1,49 @@
+-# Partial for a user form as shown to admins.
+-# origin: RM
+
+- form_for [:admin, @user] do |form|
+  %dl
+    %dt
+      = form.label :username
+    %dd
+      = form.text_field :username
+    %dt
+      = form.label :email
+    %dd
+      = form.text_field :email
+    %dt
+      = form.label :full_name
+    %dd
+      = form.text_field :full_name
+    %dt
+      = form.label :town
+    %dd
+      = form.text_field :town
+    %dt
+      = form.label :country
+    %dd
+      = form.text_field :country
+    %dt
+      = form.label :password
+      - unless form.object.new_record?
+        = help 'Leave blank to keep the password unchanged'
+    %dd
+      = form.password_field :password, :autocomplete => 'off'
+    %dt
+      = form.label :password_confirmation
+    %dd
+      = form.password_field :password_confirmation, :autocomplete => 'off'
+
+    %dt
+      = form.label :role_name
+    %dd
+      = form.select :role_name, User.available_roles.invert, :include_blank => true
+
+    %dt
+      = form.label :locked
+    %dd
+      = form.check_box :locked
+      = form.label :locked, "This user may no longer sign in"
+
+  = boring_save_cancel_buttons :delete_link => current_user.may_destroy_admin_user?(@user)
+  

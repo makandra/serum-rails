@@ -1,0 +1,40 @@
+-# View to display the list of members, the member search form and its search results.
+-# origin: M
+
+- form_for @member_search, :url => [ :members ], :html => { :method => :get } do |form|
+  = form.spec_label :name
+  = form.text_field :name
+  = form.submit 'Search'
+
+#list
+  - if @matching_users.present?
+    - form_tag request_friendships_members_path do
+      %table.grid
+        %tr
+          %th
+          %th User
+          %th Town
+          %th Country
+        - for user in @matching_users
+          %tr
+            %td.center
+              :ruby
+                request_id = "request_friendship_with_#{user.id}"
+                request_name = 'friendship_request[user_id][]'
+              - if current_user.can_become_friends_with? user
+                = spec_label_tag request_id, "Request contact with #{user.username}"
+                = check_box_tag request_name, user.id, false, :id => request_id
+              - else
+                = friendship_status user, true
+            %td= link_to current_user.name_for(user), user
+            %td= user.town
+            %td= user.country
+      - buttons do
+        %button{ :type => 'submit' }
+          = icon(:email, 'Send contact requests')
+
+    = pagination @matching_users
+
+  - else
+    %p.none
+      No users found.

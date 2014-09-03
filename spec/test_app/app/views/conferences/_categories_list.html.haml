@@ -1,0 +1,8 @@
+-# Partial to list categories on the conference list and search.
+-# origin: M 
+
+- if @categories.present?
+  - segment(:title => @category ? 'Subcategories' : 'Categories') do
+    %ul
+      - for category in @categories
+        %li= link_to icon(:category, category.name), conferences_path(:category_id => category)

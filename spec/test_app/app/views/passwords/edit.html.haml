@@ -1,0 +1,21 @@
+-# View to reset a user password after the user has forgotten her password, or wants to set her initial password
+-# when her account was created by an admin.
+-# origin: RM
+
+%h1 Choose a password
+%p
+  Please choose a new password for your account.
+- form_for(@user, :url => password_path(:user_id => @user.id, :token => @user.confirmation_token), :html => { :method => :put }) do |form|
+  %dl
+    %dt
+      = form.label :password, "New password"
+    %dd
+      = form.error_message_on :password
+      = form.password_field :password
+    %dt
+      = form.label :password_confirmation
+    %dd
+      = form.error_message_on :password_confirmation
+      = form.password_field :password_confirmation
+  - buttons do
+    = form.submit "Save password", :disable_with => "Please wait..."

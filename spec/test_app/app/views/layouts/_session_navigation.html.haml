@@ -1,0 +1,12 @@
+-# Partial for the navigation in the top-right corner, which relates to the current user being signed in.
+-# origin: RM
+
+#session_navigation
+  - if signed_in?
+    %span#current_user
+      = link_to current_user.username, current_user
+      (#{current_user.email})
+    %span#sign_out= link_to 'Sign out', session_path, :method => :delete
+  - else
+    %span#sign_up= link_to 'Sign up', [ :new, :user ]
+    %span#sign_in= link_to 'Sign in', [ :new, :session ]

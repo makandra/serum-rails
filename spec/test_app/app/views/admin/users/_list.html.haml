@@ -1,0 +1,20 @@
+-# Partial for a user list as shown to admins.
+-# origin: RM
+
+- if @users.present?
+  %table.grid
+    %tr
+      %th= User.human_attribute_name :username
+      %th= User.human_attribute_name :full_name
+      %th= User.human_attribute_name :email
+    - for user in @users
+      %tr
+        - icon_name = user.locked? ? :lock : :edit
+        %td= link_to(icon(icon_name, user.username), [:edit, :admin, user])
+        %td= maybe_blank(user.full_name)
+        %td= maybe_blank(user.email)
+  = pagination @users
+- else
+  .none
+    No users found.
+    

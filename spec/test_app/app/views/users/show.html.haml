@@ -1,0 +1,49 @@
+-# View to display a user status page.
+-# origin: M
+
+= render 'head'
+
+- columns do
+  - column do
+    - segment :title => 'User details' do
+      %dl
+        - if current_user.sees_details_of? object
+          %dt= User.human_attribute_name :email
+          %dd= object.email
+
+        %dt= User.human_attribute_name :town
+        %dd= object.town
+
+        %dt= User.human_attribute_name :country
+        %dd= object.country
+      - segment :title => 'Contact status' do
+        = friendship_status object
+        - if current_user.can_become_friends_with? object
+          - buttons do
+            = link_to icon(:email, 'Send contact request'), [ :request_friendship, object ], :method => :put
+  - column do
+    - segment :title => 'Contacts', :class => 'friendships' do
+      - if object.friends.any?
+        %ul
+          - for friend in object.friends
+            %li= link_to current_user.name_for(friend), friend
+      - else
+        %p.none
+          No confirmed contacts yet.
+
+    - if object == current_user
+      - segment :title => 'Contact requests', :class => 'friendship_requests' do
+        - if object.friendship_requests.any?
+          %table
+            - for friendship_request in object.friendship_requests
+              %tr
+                %td.beside_buttons
+                  - requesting_user = friendship_request.requesting_user
+                  = link_to current_user.name_for(requesting_user), requesting_user
+                %td
+                  - buttons do
+                    = link_to icon(:accept, 'Accept'), [:accept, friendship_request], :method => :put
+                    = link_to icon(:deny, 'Deny'), [:deny, friendship_request], :method => :delete
+        - else
+          %p.none
+            No unanswered contact requests.

@@ -1,0 +1,866 @@
+// Styles for the application views.
+// origin: RM
+
+// This stylesheet uses some icons from the wonderful Fugue icon set by Yusuke Kamiyamane  (http://p.yusukekamiyamane.com
+// This stylesheet uses some icons from the wonderful silk icon set by famfamfam (http://www.famfamfam.com/lab/icons/silk/)
+// Please do not remove these attributions.
+
+@import reset.sass
+@import mixins.sass
+
+$palette_orange: #f68113
+$palette_blue: #00adef
+$palette_green: #97d550
+
+$link_color: $palette_green - #323 - #111
+$tag_color: $palette_orange - #080808
+
+$light_gray: #a5aeb6
+
+$tab_navigation_height: 28px
+$tab_spacing: 6px
+$bubble_navigation_height: 24px
+
+$element_spacing: 15px
+$h1_margin_top: 10px
+
+$input_border_color: #999
+$error_color: #d43
+
+$roundness: 2px
+
+=default_shadow
+  +box_shadow(0 2px 3px #e8e8e8)
+
+=text_field_icon($image_url)
+  background: "#fff url(#{$image_url}) no-repeat 4px center"
+  padding-left: 24px
+
+// Global styles ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+img
+  vertical-align: middle
+
+.clear
+  clear: both
+  float: none
+
+.hidden
+  display: none
+
+.float_left
+  float: left
+
+.float_right
+  float: right
+
+.center
+  text-align: center
+
+th.right,
+td.right
+  text-align: right
+
+th.money_amount,
+td.money_amount
+  text-align: right
+  white-space: nowrap
+
+body
+  line-height: 1.4em
+  background-color: white
+
+body, input, select, textarea, button
+  font-family: arial, helvetica, sans-serif
+  font-size: 14px
+
+a
+  color: $link_color
+  text-decoration: none
+  font-weight: bold
+  &:visited
+    color: $link_color
+  &:hover
+    color: $link_color + #222
+
+hr
+  color: #ddd
+  background-color: #ddd
+  border: none
+  height: 1px
+
+.todo
+  background-color: #fe4
+  border: 1px dotted #f21
+  +opacity(0.3)
+
+.none
+  color: #777
+
+.top_half_box
+  border-top: 1px solid #bbb
+  border-left: 1px solid #bbb
+  border-right: 1px solid #bbb
+  +round_top_corners($roundness)
+  +default_shadow
+  padding: 10px 10px
+  +gradient(#fff, #eee)
+  +hide_last_margin
+
+.bottom_half_box
+  border-bottom: 1px solid #bbb
+  border-left: 1px solid #bbb
+  border-right: 1px solid #bbb
+  +round_bottom_corners($roundness)
+  +default_shadow
+  padding: 10px 10px
+  +gradient(#fff, #eee)
+  +hide_last_margin
+
+.box
+  border: 1px solid #bbb
+  +round_corners($roundness)
+  +default_shadow
+  padding: 10px 10px
+  +gradient(#fff, #eee)
+  +hide_last_margin
+
+.relative_wrapper
+  position: relative
+
+// Page layout /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.viewport
+  min-width: 930px
+  width: 90%
+  max-width: 1300px
+  margin: 0 auto
+  position: relative
+
+#head
+  +gradient($palette_green - #111, $palette_green - #444)
+
+  #head_inner
+
+    position: relative
+
+    #site_name
+      float: left
+      margin: 17px 0 11px 0
+      a
+        color: white
+        font-size: 24px
+        text-shadow: "0px 1px 2px #{$palette_green - #777}"
+
+    #session_navigation
+      float: right
+      font-size: 14px
+      font-weight: bold
+      padding: 0 10px
+      +round_bottom_corners(8px)
+      line-height: 25px
+      height: 26px
+      overflow: hidden
+      font-size: 13px
+      +gradient($palette_green - #777, $palette_green - #555)
+      color: $palette_green + #222
+
+      a
+        color: white
+        &:hover
+          text-decoration: underline
+
+      #sign_out,
+      #sign_in
+        padding-top: 5px
+        padding-bottom: 5px
+        border-left: "1px solid #{$palette_green - #444}"
+        padding-left: 8px
+        margin-left: 3px
+
+  #notifications
+    @extend .viewport
+    z-index: 2
+    #notifications_inner
+      position: absolute
+      right: 0
+      bottom: -26px
+      a.notification
+        float: left
+        margin-left: 10px
+        color: white
+        &:hover
+          text-decoration: underline
+
+
+#tail
+  border-top: 1px dotted #999
+  padding: 5px 15px
+  font-size: 12px
+
+
+
+.flash
+  z-index: 2
+  font-weight: bold
+  color: #493
+  +gradient(#fff, #ddd)
+  border: 1px solid #999
+  padding: 4px
+  font-size: 20px
+  position: absolute
+  width: 800px
+  line-height: 24px
+  margin-left: -400px
+  text-align: center
+  +round_bottom_corners(50px)
+  top: 0
+  left: 50%
+
+  &.error, .error, &.failure, .failure
+    color: $error_color
+
+
+.tab_navigation
+  a
+    float: left
+    padding: 0 10px
+    height: $tab_navigation_height
+    line-height: $tab_navigation_height
+    font-weight: bold
+    text-decoration: none
+    background-color: #abc
+    +gradient($palette_green - #444, $palette_green - #777)
+    color: #fff
+    margin-right: $tab_spacing
+    +round_top_corners($roundness)
+    margin-top: 4px
+    &:hover
+      margin-top: 0
+      padding-bottom: 4px
+    &.current
+      color: #224
+      +gradient(#fff, #fff)
+      background-color: #fff
+    &:last-child
+      padding-right: 10px
+  .end
+    display: block
+    clear: both
+    height: 0
+
+.bubble_navigation
+  a
+    height: $bubble_navigation_height
+    line-height: $bubble_navigation_height
+    color: #334
+    float: left
+    margin-right: 10px
+    &:hover
+      color: $palette_green - #555
+    &.current
+      padding: 0 7px
+      +gradient($palette_green - #222, $palette_green - #444)
+      +round_corners(5px)
+      color: white
+  .end
+    display: block
+    clear: both
+    height: 0
+
+#main_navigation
+  .level_1
+    @extend .tab_navigation
+    @extend .viewport
+  .level_2
+    @extend .bubble_navigation
+    +gradient(#fff, #efd - #131313)
+    border-bottom: 1px solid #efd - #444
+    .level_2_inner
+      padding: 6px 0 5px 0
+      @extend .viewport
+
+#page_head
+  +gradient(#fff, #ddd)
+  padding-top: 20px
+  border-bottom: 1px solid #bbb
+  overflow: visible
+  #page_head_inner
+    @extend .viewport
+    position: relative
+    h1
+      margin: 0
+      padding-bottom: 5px
+    .navigation
+      .level_1
+        @extend .tab_navigation
+        position: absolute
+        right: 0
+        bottom: -1px
+        a
+          margin-right: 0
+          margin-left: $tab_spacing
+          +gradient($palette_orange + #111, $palette_orange - #111)
+          border: "1px solid #{$palette_orange - #222}"
+          &.current
+            border-color: #bbb
+            border-bottom-color: #fff
+
+h1
+  font-size: 20px
+  line-height: 26px
+  font-weight: bold
+  margin-top: $h1_margin_top
+  margin-bottom: 10px
+  color: #342
+  text-shadow: 0 0 3px #fff
+
+#container
+  position: relative
+
+
+#main
+  background-color: #fff
+  padding: 13px 0 15px 0
+  #main_inner
+    @extend .viewport
+
+#javascript_requirement
+  position: absolute
+  width: 600px
+  left: 50%
+  top: 200px
+  margin-left: -300px
+  border: 1px solid #f30
+  padding: 14px
+  font-weight: bold
+  font-size: 22px
+  line-height: 26px
+  +gradient(#fee, #fcc)
+  +round_corners(3px)
+
+
+// Icon decorations ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.create_icon
+  +icon("../images/icons/plus.png")
+
+.edit_icon
+  +icon("../images/icons/quill.png")
+
+.show_icon
+  +icon("../images/icons/show.png")
+
+.group_icon
+  +icon("../images/icons/users.png")
+
+.user_icon
+  +icon("../images/icons/user-gray.png")
+
+.category_icon
+  +icon("../images/icons/folder-medium.png")
+
+.contact_icon
+  +icon("../images/icons/card-address.png")
+
+.bookmark_icon
+  +icon("../images/icons/bookmark.png")
+
+.delete_icon
+  +icon("../images/icons/cross-script.png")
+
+.phone_icon
+  +icon("../images/icons/telephone.png")
+
+.fax_icon
+  +icon("../images/icons/telephone-fax.png")
+
+.url_icon
+  +icon("../images/icons/globe-green.png")
+
+.email_icon
+  +icon("../images/icons/mail.png")
+
+.sign_out_icon
+  +icon("../images/icons/heart-break.png")
+
+.sign_in_icon
+  +icon("../images/icons/key.png")
+
+.info_icon
+  +icon("../images/icons/information-balloon.png")
+
+.event_icon,
+.calendar_icon
+  +icon("../images/icons/calendar-month.png")
+
+.date_icon
+  +icon("../images/icons/calendar-month.png")
+
+.attachment_icon
+  +icon("../images/icons/paper-clip.png")
+
+.note_icon
+  +icon("../images/icons/sticky-note-text.png")
+
+.lock_icon
+  +icon("../images/icons/lock--exclamation.png")
+
+.restore_icon
+  +icon("../images/icons/bin.png")
+
+.print_icon
+  +icon("../images/icons/printer.png")
+
+.attend_icon,
+.accept_icon
+  +icon("../images/icons/thumb-up.png")
+
+.accept_invitation_icon
+  +icon("../images/icons/thumb-up.png")
+
+.dismiss_invitation_icon
+  +icon("../images/icons/thumb.png")
+
+.cancel_attendance_icon,
+.deny_icon
+  +icon("../images/icons/cross-script.png")
+
+.accept_invitation
+
+.search_icon
+  +icon("../images/icons/search.png")
+
+.invite_icon
+  +icon("../images/icons/mail.png")
+
+.conference_icon
+  +icon("../images/icons/balloon.png")
+
+
+
+// Main content styles /////////////////////////////////////////////////////////////////////////////////////////////////
+
+#main
+
+  .columns
+    // take away outer margins so columned page segments can break into the column's own padding
+    margin: 0 -20px
+
+    .column,
+    .wide_column,
+    .narrow_column
+      width: 50%
+      min-width: 400px
+      float: left
+
+      .column_inner
+        padding: 0 20px
+
+    .wide_column
+      width: 60%
+      min-width: 500px
+
+    .narrow_column
+      width: 40%
+      min-width: 300px
+      input[type=text]
+        max-width: 100%
+
+  .segment
+    margin-bottom: 20px
+    .segment_title
+      margin-bottom: 10px
+      background: url(../images/legend_bg.png) repeat-x
+      margin-left: -13px
+      margin-right: -13px
+      padding-left: 13px
+      line-height: 25px
+
+      color: $palette_orange
+      color: #333
+      span
+        background-color: #7f7f7f
+        color: white
+        padding: 4px 6px
+        font-size: 14px
+        xtext-transform: uppercase
+        font-weight: bold
+        +round_corners($roundness)
+
+  .tags, .tag_cloud
+
+    .tag
+      +round_corners($roundness)
+      background-color: #eeecec
+      border: 1px solid #ccc9c9
+      padding: 1px 5px 1px 5px
+      color: $tag_color
+      font-weight: bold
+
+  .tag_cloud
+    font-size: 12px
+    line-height: 24px
+    .tag
+      margin-right: 4px
+      &.xs
+        font-size: 0.6em
+      &.s
+        font-size: 0.8em
+      &.m
+        font-size: 1.0em
+      &.l
+        font-size: 1.2em
+      &.xl
+        font-size: 1.4em
+
+
+  dl
+    margin-bottom: $element_spacing
+    dt
+      font-weight: bold
+      margin-bottom: 0.1em
+    dd
+      margin-bottom: 0.6em
+
+
+  form
+
+    input[type=text], input[type=password], textarea
+      width: 400px
+      padding: 4px
+      border: 1px solid $input_border_color
+      +round_corners($roundness)
+      +gradient(#f8f8f8, #fff)
+
+    select
+      max-width: 400px
+
+    input[type=submit], button[type=submit]
+      font-weight: bold
+
+    textarea
+      width: 98%
+
+    .help
+      font-weight: normal
+      color: #666
+      margin-left: 2px
+
+    input[type=text].number_field, input[type=text].money_field
+      width: 70px
+      text-align: right
+
+    input[type=text].date_picker
+      width: 90px
+      +text_field_icon("../images/icons/calendar-month_light.png")
+
+    input[type=text].datetime_picker
+      width: 130px
+      +text_field_icon("../images/icons/calendar-month_light.png")
+
+    input[type=text].email_field
+      +text_field_icon("../images/icons/mail.png")
+
+    input[type=text].url_field
+      +text_field_icon("../images/icons/globe-green_light.png")
+
+    input[type=text].phone_field
+      +text_field_icon("../images/icons/telephone_light.png")
+
+    input[type=text].fax_field
+      +text_field_icon("../images/icons/telephone-fax_light.png")
+
+    input[type=text].zip_code_field
+      width: 48px
+      text-align: center
+
+    .field_with_errors
+      input, select, textarea
+        border: 2px solid $error_color
+      label
+        color: $error_color
+
+    .error_message
+      color: $error_color
+      font-style: italic
+
+    input[type=text]#person_day_of_birth, input[type=text]#person_month_of_birth, input[type=text]#person_year_of_birth
+      width: 20px
+      text-align: center
+    input[type=text]#person_year_of_birth
+      width: 40px
+
+    select.combo_box option[value='Neu...']
+      color: #182
+
+    .tag_picker
+      .tag_cloud
+        margin-top: 7px
+
+  h1, h2, h3, p, form, ul, ol, dl, table, .flash
+    margin-bottom: $element_spacing
+
+  h2
+    font-weight: bold
+    font-size: 1.2em
+    color: #565
+    padding-bottom: 3px
+    border-bottom: 1px dotted #aaa
+    margin-bottom: $element_spacing * 0.6
+
+  table
+
+    th
+      font-weight: bold
+
+    th, td
+      padding: 0 0.9em 0.3em 0
+      vertical-align: top
+
+      p
+        margin-bottom: 10px
+
+      p:last-child
+        margin-bottom: 0
+
+    td.user_text
+      font-style: italic
+
+    &.vertical
+      th
+        border-right: 1px solid #ccd
+      td
+        padding-left: 13px
+
+    &.grid
+      border-left: 1px solid #999
+      border-right: 1px solid #999
+      border-collapse: collapse
+      margin-bottom: $element_spacing
+      +default_shadow
+
+      td, th
+        border-top: 1px solid #999
+        border-bottom: 1px solid #999
+        padding: 5px 8px
+
+      th
+        color: #444
+        +gradient(#eee, #ccc)
+        font-size: 11px
+        xtext-transform: uppercase
+        padding: 2px 8px
+
+      td
+        +gradient(#fdfdfd, #e2e2e2)
+
+      form
+        margin-bottom: 0
+    
+    .buttons
+      margin-bottom: 0
+
+  .pagination
+    height: 30px
+    margin-bottom: $element_spacing
+
+    a, span
+      float: left
+      +gradient(#f4f4f4, #d0d0d0)
+      height: 25px
+      line-height: 25px
+      text-align: center
+      padding: 0 5px
+      min-width: 15px
+      margin-right: 6px
+      color: #333
+      +round_corners($roundness)
+      border: 1px solid #aaa
+      font-weight: bold
+      font-size: 13px
+    a
+      &:hover
+        +gradient(#fff, #ddd)
+    span.current
+      +gradient($link_color + #333, $link_color)
+      border-color: $link_color - #222
+      color: white
+    a.prev_page, a.next_page
+      display: none
+    .gap
+      background: none
+      color: #888
+      border: none
+      margin-right: 0
+      margin-left: -6px
+    .disabled
+      display: none
+
+  #search_widget
+    line-height: 26px
+    input#query
+      width: 300px
+      padding: 4px 3px 4px 23px
+      background: white url(../images/icons/search.png) no-repeat 4px 4px
+    .help_button
+    table.help
+      margin-bottom: 0
+      margin-top: 10px
+      td, th
+        padding-bottom: 1px
+        line-height: 22px
+      td
+        font-style: italic
+        em
+          font-style: normal
+          color: #999
+
+  .buttons
+
+    line-height: 30px
+    height: 30px
+    margin-bottom: $element_spacing
+
+    &.bar
+      padding: 8px 16px 8px 10px
+      margin-left: -10px
+      margin-right: -10px
+      +gradient(#eee, #fff)
+      border-top: 1px solid #ccc
+
+      .links
+        float: right
+        a
+          float: none
+          padding: 3px 0
+          background: none
+          border: none
+          +box_shadow('none')
+          color: #222
+          &:hover
+            color: #444
+
+    a, input[type=submit], input[type=button], button
+      float: left
+      line-height: 28px
+      height: 28px
+      margin-right: 6px
+      padding: 0 7px
+      +gradient(#fff, #ddd)
+      border: 1px solid #999
+      color: #111
+      +round_corners($roundness)
+      font-size: 14px
+      white-space: nowrap
+      +default_shadow
+      cursor: pointer
+      &:hover
+        background-color: #f6f6f6
+        text-decoration: none
+        border-color: #aaa
+        +gradient(#fff, #ddd)
+        color: #444
+      &[disabled]
+        color: #888 !important
+      &:last-child
+        margin-right: 0
+
+    input[type=text]
+      float: left
+      margin-right: 6px
+
+    .separator
+      border-left: 1px solid $light_gray
+      width: 1px
+      height: 100%
+      margin-right: 5px
+      float: left
+
+  td.beside_buttons
+    line-height: 30px
+
+  .info
+    @extend .info_icon
+    font-weight: bold
+    color: #335
+
+  .blob
+    margin-bottom: $element_spacing
+    .meta
+      color: #666
+      @extend .top_half_box
+      font-size: 13px
+      font-weight: bold
+      padding: 5px 10px
+      +gradient(#f5f5f5, #ddd)
+      a
+        // color: #444
+    .meat
+      @extend .bottom_half_box
+      table
+        margin: 0
+        tr:last-child
+          td, th
+            padding-bottom: 0
+
+      .footer
+        color: gray
+        font-size: 12px
+        line-height: 13px
+        margin-top: 6px
+
+  .prose
+    color: #333
+    font-style: italic
+    p
+      margin-bottom: 3px
+    +hide_last_margin
+
+  // .user_info
+  //   color: #999
+  //   a.email
+  //     color: #666
+
+
+
+
+// Screen specific styles //////////////////////////////////////////////////////////////////////////////////////////////
+
+#main
+  #admin_users
+    .lock_icon
+      color: #282828
+
+  #invitations
+    .invitation
+      @extend .box
+      margin-bottom: $element_spacing
+      .description
+        font-weight: bold
+      .sender
+        font-size: 12px
+        line-height: 16px
+        margin-bottom: 6px
+        
+  #conference_search_form
+    .advanced_link
+      line-height: 30px
+    .dates, .categories
+      margin-bottom: 10px
+    .categories .list
+      width: 400px
+      .check_box_with_label
+        float: left
+        margin-right: 10px
+
+  .friend_status
+    +icon_style
+    margin-bottom: 6px
+
+
+  #conference
+    table
+      ul
+        margin-bottom: 0
+        

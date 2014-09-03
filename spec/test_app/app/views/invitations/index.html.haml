@@ -1,0 +1,26 @@
+-# View to show outstanding conference invitations of the signed in user.
+-# origin: M
+
+#invitations
+
+  - invitations = current_user.received_invitations.include_everything
+
+  - if invitations.any?
+
+    - for invitation in current_user.received_invitations
+      .blob.invitation
+        .description
+          Invitation to
+          = link_to(invitation.conference.name, invitation.conference)
+        .sender
+          from
+          = link_to(current_user.name_for(invitation.sender), invitation.sender)
+        - buttons do
+          = link_to(icon(:accept_invitation, 'Accept'), accept_invitation_path(invitation), :title => "This will sign you up for #{invitation.conference.name}", :method => :put)
+          = link_to(icon(:dismiss_invitation, 'Dismiss'), dismiss_invitation_path(invitation), :method => :delete)
+
+  - else
+
+    .none
+      You have no outstanding conference invitations.
+      

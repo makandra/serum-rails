@@ -1,0 +1,14 @@
+-# View to request a user password reset token after the user has forgotten her password.
+-# origin: RM
+
+%h1 Reset your password
+%p
+  Please fill in the e-mail address you are using for this application.
+  %br/
+  We will then send you instructions to reset your password.
+- form_for :password, :url => password_path do |form|
+  %dl
+    %dt= form.label :email, "E-mail"
+    %dd= form.text_field :email
+  - buttons do
+    = form.submit "Request instructions", :disable_with => "Please wait..."

@@ -1,0 +1,45 @@
+-# Partial for the sign up form.
+-# origin: RM
+
+- form_for @user do |form|
+  %dl
+    %dt
+      = form.label :username
+    %dd
+      = form.error_message_on :username
+      = form.text_field :username
+    %dt
+      = form.label :email
+    %dd
+      = form.error_message_on :email
+      = form.text_field :email
+    %dt
+      = form.label :password
+      - unless form.object.new_record?
+        = help 'Leave blank to keep your password unchanged'
+    %dd
+      = form.error_message_on :password
+      = form.password_field :password, :autocomplete => 'off'
+    %dt
+      = form.label :password_confirmation
+    %dd
+      = form.error_message_on :password_confirmation
+      = form.password_field :password_confirmation, :autocomplete => 'off'
+    %dt
+      = form.label :full_name
+    %dd
+      = form.error_message_on :full_name
+      = form.text_field :full_name
+    %dt
+      = form.label :town
+    %dd
+      = form.error_message_on :town
+      = form.text_field :town
+    %dt
+      = form.label :country
+    %dd
+      = form.error_message_on :country
+      = form.text_field :country
+
+  - buttons do
+    = form.submit(form.object.new_record? ? 'Sign up' : 'Save')

@@ -1,0 +1,9 @@
+This was built on http://jqueryui.com/download
+
+Selected options:
+- Core
+- Datepicker
+- Autocomplete
+- Dialog
+- Slider
+

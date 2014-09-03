@@ -1,0 +1,22 @@
+-# Partial to display a list of conferences matching the search query.
+-# origin: M
+
+- if @running_conferences.present?
+
+  - segment(:title => 'Currently running conferences', :id => 'running_conferences') do
+    %ul
+      - for conference in @running_conferences
+        %li= link_to icon(:conference, conference.name), conference
+
+
+-# Always show the generic list of conferences
+
+- segment(:title => 'Conferences') do
+  - if @conferences.present?
+    %ul
+      - for conference in @conferences
+        %li= link_to icon(:conference, conference.name), conference
+    = pagination @conferences        
+  - else
+    .none
+      No conference found.

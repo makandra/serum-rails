@@ -1,0 +1,19 @@
+-# View to sign into the application.
+-# origin: RM
+
+= page_head :title => icon(:sign_in, 'Sign in')
+
+%p
+  No account yet?
+  = link_to 'Sign up!', new_user_path
+
+- form_for :session, :url => session_path do |form|
+  %dl
+    %dt= form.label :email, 'E-mail or username'
+    %dd= form.text_field :email, :value => params[:session].andand[:email], :tabindex => 1
+    %dt
+      = form.label :password, 'Password'
+      = help link_to('Forgot your password?', new_password_path, :tabindex => 4)
+    %dd= form.password_field :password, :tabindex => 2
+  - buttons do
+    = form.submit 'Sign in', :tabindex => 3

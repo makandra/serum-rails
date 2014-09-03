@@ -1,0 +1,163 @@
+PATH
+  remote: vendor/gems/cucumber-rails-0.4.1
+  specs:
+    cucumber-rails (0.4.1)
+      cucumber (>= 0.10.1)
+      nokogiri (>= 1.4.4)
+      rack-test (>= 0.5.7)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    abstract (1.0.0)
+    actionmailer (2.3.11)
+      actionpack (= 2.3.11)
+    actionpack (2.3.11)
+      activesupport (= 2.3.11)
+      rack (~> 1.1.0)
+    activerecord (2.3.11)
+      activesupport (= 2.3.11)
+    activeresource (2.3.11)
+      activesupport (= 2.3.11)
+    activesupport (2.3.11)
+    acts-as-taggable-on (2.0.6)
+    aegis (2.5.3)
+    ancestry (1.2.4)
+      activerecord (>= 2.2.2)
+    andand (1.3.1)
+    builder (3.0.0)
+    capybara (0.4.1.2)
+      celerity (>= 0.7.9)
+      culerity (>= 0.2.4)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      selenium-webdriver (>= 0.0.27)
+      xpath (~> 0.1.3)
+    celerity (0.8.9)
+    childprocess (0.1.8)
+      ffi (~> 1.0.6)
+    clearance (0.8.8)
+    columnize (0.3.2)
+    configuration (1.2.0)
+    cucumber (0.10.2)
+      builder (>= 2.1.2)
+      diff-lcs (>= 1.1.2)
+      gherkin (>= 2.3.5)
+      json (>= 1.4.6)
+      term-ansicolor (>= 1.0.5)
+    cucumber_factory (1.7.4)
+    cucumber_spinner (0.2.1)
+      rtui (>= 0.2.2)
+    culerity (0.2.15)
+    database_cleaner (0.6.7)
+    diff-lcs (1.1.2)
+    erubis (2.6.6)
+      abstract (>= 1.0.0)
+    faker (0.3.1)
+    ffi (1.0.7)
+      rake (>= 0.8.7)
+    gherkin (2.3.7)
+      json (>= 1.4.6)
+    haml (3.1.1)
+    inaction_mailer (0.6)
+    jrails (0.6.0)
+    json (1.5.1)
+    json_pure (1.5.1)
+    launchy (0.4.0)
+      configuration (>= 0.0.5)
+      rake (>= 0.8.1)
+    linecache (0.43)
+    machinist (1.0.6)
+    machinist_callbacks (0.1.3)
+      machinist (< 2.0.0)
+    mime-types (1.16)
+    modularity (0.6.0)
+    mysql (2.8.1)
+    nokogiri (1.4.4)
+    paperclip (2.3.4)
+      activerecord
+      activesupport
+    query_diet (0.2.0)
+    rack (1.1.2)
+    rack-test (0.6.0)
+      rack (>= 1.0)
+    rails (2.3.11)
+      actionmailer (= 2.3.11)
+      actionpack (= 2.3.11)
+      activerecord (= 2.3.11)
+      activeresource (= 2.3.11)
+      activesupport (= 2.3.11)
+      rake (>= 0.8.3)
+    rake (0.8.7)
+    resource_controller (0.6.6)
+    rspec (1.3.2)
+    rspec-rails (1.3.4)
+      rack (>= 1.0.0)
+      rspec (~> 1.3.1)
+    rspec_spinner (1.1.3)
+      rtui
+    rtui (0.2.2)
+    ruby-debug (0.10.4)
+      columnize (>= 0.1)
+      ruby-debug-base (~> 0.10.4.0)
+    ruby-debug-base (0.10.4)
+      linecache (>= 0.3)
+    ruby-ole (1.2.11.1)
+    rubyzip (0.9.4)
+    sass (3.1.1)
+    selenium-webdriver (0.2.0)
+      childprocess (>= 0.1.7)
+      ffi (>= 1.0.7)
+      json_pure
+      rubyzip
+    shoulda (2.11.1)
+    spreadsheet (0.6.5.2)
+      ruby-ole (>= 1.0)
+    term-ansicolor (1.0.5)
+    timecop (0.3.5)
+    vpim (0.695)
+    will_paginate (2.3.15)
+    xpath (0.1.4)
+      nokogiri (~> 1.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  acts-as-taggable-on (= 2.0.6)
+  aegis
+  ancestry
+  andand (= 1.3.1)
+  capybara
+  clearance (= 0.8.8)
+  cucumber
+  cucumber-rails!
+  cucumber_factory
+  cucumber_spinner
+  database_cleaner
+  erubis (= 2.6.6)
+  faker (= 0.3.1)
+  haml
+  inaction_mailer
+  jrails (= 0.6.0)
+  launchy
+  machinist (= 1.0.6)
+  machinist_callbacks (= 0.1.3)
+  modularity (= 0.6.0)
+  mysql
+  paperclip (= 2.3.4)
+  query_diet (= 0.2.0)
+  rails (= 2.3.11)
+  resource_controller (= 0.6.6)
+  rspec (= 1.3.2)
+  rspec-rails
+  rspec_spinner (= 1.1.3)
+  ruby-debug
+  sass
+  shoulda (= 2.11.1)
+  spreadsheet (= 0.6.5.2)
+  timecop (= 0.3.5)
+  vpim
+  will_paginate (= 2.3.15)

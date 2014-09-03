@@ -1,0 +1,9 @@
+-# Partial for the user search form as shown to an admin.
+-# origin: M
+
+- form_tag admin_users_path, :method => :get do
+  - buttons do
+    = spec_label_tag 'query', 'Query'
+    = text_field_tag "query", params[:query]
+    = submit_tag "Search"
+    

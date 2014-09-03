@@ -1,0 +1,75 @@
+-# View for the conference summary.
+-# origin: M
+
+= render 'head'
+
+#conference
+
+  - buttons do
+    - if @conference.attended_by?(current_user)
+      - if current_user.may_cancel_attendance_conference?(@conference)
+        = link_to icon(:cancel_attendance, 'Cancel your attendance'), cancel_attendance_conference_path(@conference), :method => :put
+    - else
+      - if current_user.may_attend_conference?(@conference)
+        = link_to icon(:attend, 'Sign up for this conference'), attend_conference_path(@conference), :method => :put
+
+    = link_to icon(:invite, 'Invite contacts'), new_invitation_path(:invitation => { :conference_id => @conference.id})
+    = link_to icon(:calendar, 'Download as iCalendar'), object_path(:format => 'ics')
+
+  %table
+
+    %tr
+      %th
+        = Conference.human_attribute_name :description
+      %td
+        .prose
+          = simple_format @conference.description
+
+    - if @conference.categories.any?
+      %tr
+        %th
+          = Conference.human_attribute_name :categories
+        %td
+          %ul
+            - for category in @conference.categories
+              %li
+                = icon(:category, category.name)
+
+    %tr
+      %th
+        = Conference.human_attribute_name :start_date
+      %td
+        =l @conference.start_date
+
+    %tr
+      %th
+        = Conference.human_attribute_name :end_date
+      %td
+        =l @conference.end_date
+
+    %tr
+      %th
+        = Conference.human_attribute_name :address
+      %td
+        .prose
+          = simple_format @conference.address
+
+    %tr
+      %th
+        = Conference.human_attribute_name :user_id
+      %td
+        = link_to icon(:user, @conference.user.username_with_full_name), @conference.user
+        (#{@conference.user.email})
+
+  - if @conference.attendees.any?
+    - segment :title => 'Attendees', :id => 'attendees' do
+      %table.grid
+        %tr
+          %th Name
+          %th= User.human_attribute_name(:email)
+        - for attendee in @conference.attendees
+          %tr
+            %td
+              = link_to(icon(:attendee, current_user.name_for(attendee, attendee == @conference.user)), attendee)
+            %td
+              = current_user.email_for(attendee, attendee == @conference.user)

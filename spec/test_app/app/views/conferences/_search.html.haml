@@ -1,0 +1,24 @@
+-# Partial for the conference search form.
+-# origin: M
+
+- form_for @conference_search, :url => search_conferences_path, :html => { :method => :get, :id => 'conference_search_form', :class => ('advanced' if local_assigns[:advanced]) } do |form|
+  - if local_assigns[:advanced]
+
+    %dl
+      %dt Dates
+      %dd.dates
+        = form.label :from
+        = form.date_picker :from
+        = form.label :until, 'until'
+        = form.date_picker :until
+      %dt Categories
+      %dd.list.categories
+        = form.check_box_list :category_ids, Category.all.sort.collect { |c| [c.id.to_s, c.name] }, :allow_empty => true
+        = clear
+
+  - buttons do
+    = form.spec_label :query, 'Query'
+    = form.text_field :query
+    = form.submit 'Search'
+
+  = clear

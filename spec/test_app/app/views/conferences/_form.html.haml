@@ -1,0 +1,32 @@
+-# Partial for a conference form as shown to users.
+-# origin: M
+
+%dl
+  %dt
+    = form.label :name
+  %dd
+    = form.error_message_on :name
+    = form.text_field :name
+  %dt
+    = form.label :description
+  %dd
+    = form.error_message_on :description
+    = form.text_area :description, :rows => 3
+  %dt
+    = form.label :start_date
+  %dd
+    = form.error_message_on :start_date
+    = form.date_picker :start_date
+  %dt
+    = form.label :end_date
+  %dd
+    = form.error_message_on :end_date
+    = form.date_picker :end_date
+  %dt
+    = form.label :address
+  %dd
+    = form.error_message_on :address
+    = form.text_area :address, :rows => 3
+  %dt Categories
+  %dd
+    = form.check_box_list :category_list, Category.all.collect { |c| [c.id.to_s, c.name] }

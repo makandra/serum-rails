@@ -7,6 +7,7 @@ module Serum
       end
 
       def self.metric(name, &block)
+        @metrics ||= []
         @metrics << name
         define_method name, &block
       end

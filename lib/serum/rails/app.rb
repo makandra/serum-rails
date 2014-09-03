@@ -37,7 +37,7 @@ module Serum
         ]
         expected_folders.each do |expected_folder|
           path = File.join(@root, expected_folder)
-          File.dir?(path) or raise "Not a Rails application: #{@root} (expected folder #{expected_folder}")
+          File.dir?(path) or raise "Not a Rails application: #{@root} (expected folder #{expected_folder}"
         end
       end
 

@@ -1,0 +1,13 @@
+-# Partial for displaying flash messages (usually notifications for the success or failure of a user action) in the page head.
+-# origin: RM
+
+- flash.each do |level, value|
+  %div{:class => "flash #{h level}"}
+    = h value
+
+- if flash.any?
+  :javascript
+    setTimeout(function() {
+      $('.flash').fadeOut(400);
+    }, 1800);
+    

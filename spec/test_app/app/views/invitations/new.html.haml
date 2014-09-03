@@ -1,0 +1,20 @@
+-# View to invite friends to a conference.
+-# origin: M
+
+= page_head :title => "Invite contacts to ".html_safe + link_to(object.conference.name, object.conference)
+
+#invite_friends
+  - if current_user.friends.any?
+    %table.grid
+      - for friend in current_user.friends
+        - friend_name = current_user.name_for(friend)
+        %tr{:id => "friend_#{friend.username}"}
+          %td.beside_buttons
+            = link_to icon(:user, friend_name), friend
+          %td
+            - buttons do
+              = link_to icon(:invite, 'Invite'), invitations_path(:invitation => { :conference_id => object.conference.id, :recipient_id => friend.id }), :method => :post
+  - else
+    .none
+      You have no contacts to invite.
+      

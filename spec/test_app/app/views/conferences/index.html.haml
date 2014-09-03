@@ -1,0 +1,22 @@
+-# View to display the list of conferences.
+-# origin: M
+
+- if @category
+  = page_head :title => icon(:category, @category.name)
+- else
+  = render 'search'
+
+- if current_user.may_create_conference?
+  = boring_create_button(:label => 'Add conference')
+
+- columns do
+
+  - column do
+    #conferences
+      = list
+
+  - if @categories.present?
+    - column(:size => :narrow) do
+      #categories
+        = render 'categories_list'
+

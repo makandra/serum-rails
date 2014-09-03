@@ -1,0 +1,9 @@
+-# View to create a new conference.
+-# origin: M
+
+= page_head :title => icon(:create, 'New conference')
+
+- form_for @conference do |form|
+  = form.partial 'form'
+  - buttons do
+    = form.submit 'Create'

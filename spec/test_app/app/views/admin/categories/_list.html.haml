@@ -1,0 +1,17 @@
+-# Partial for a category list as shown to admins.
+-# origin: M
+
+- categories = local_assigns[:categories] || @categories
+
+- if categories.present?
+  %table.grid
+    %tr
+      %th= Category.human_attribute_name :name
+    - for category in categories
+      %tr
+        %td= link_to(icon(:category, category.name), [:admin, category])
+  = pagination categories
+- else
+  .none
+    No categories found.
+    

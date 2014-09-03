@@ -1,0 +1,24 @@
+# Sample database settings.
+# origin: GM
+
+development:
+  adapter: mysql
+  database: platforms_development
+  encoding: utf8
+  username: root
+  password: secret
+
+test:
+  adapter: mysql
+  database: platforms_test
+  encoding: utf8
+  username: root
+  password: secret
+
+cucumber:
+  adapter: mysql
+  database: platforms_cucumber
+  encoding: utf8
+  username: root
+  password: secret
+  

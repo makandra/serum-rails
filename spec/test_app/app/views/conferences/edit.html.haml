@@ -1,0 +1,8 @@
+-# View to edit a conference as its creator.
+-# origin: M
+
+= render 'head'
+
+- form_for @conference do |form|
+  = form.partial 'form'
+  = boring_save_cancel_buttons :delete_link => current_user.may_destroy_conference?(@conference)
