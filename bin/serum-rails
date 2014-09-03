@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require 'serum-rails'
+
+root = ARGV[0].presence || '.'
+
+metrics = Serum::Rails::Metrics.new(root)
+
+metrics.to_hash.each do |metric, value|
+  puts "#{metric} = #{value}"
+end
