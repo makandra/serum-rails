@@ -24,7 +24,7 @@ module Serum
       private
 
       def ensure_root_exists
-        File.dir?(@root) or raise "Not a directory: #{@root}"
+        File.directory?(@root) or raise "Not a directory: #{@root}"
       end
 
       def ensure_is_rails_app
@@ -37,12 +37,12 @@ module Serum
         ]
         expected_folders.each do |expected_folder|
           path = File.join(@root, expected_folder)
-          File.dir?(path) or raise "Not a Rails application: #{@root} (expected folder #{expected_folder}"
+          File.directory?(path) or raise "Not a Rails application: #{@root} (expected folder #{expected_folder}"
         end
       end
 
       def code_scanner
-        @code_scanner ||= CodeScanner.new(self)
+        @code_scanner ||= CodeScanner.new(@root)
       end
 
     end

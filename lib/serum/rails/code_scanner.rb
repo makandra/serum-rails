@@ -9,11 +9,12 @@ module Serum
         @root = root
       end
 
-      def count_lines(options)
+      def count_lines(options = {})
         pattern = options.fetch(:pattern, ANYTHING)
         folders = options.fetch(:folders, DEFAULT_FOLDERS)
         type_selection = TypeSelection.new(options[:types])
-        paths(folders, type_selection).each do |path|
+        paths(folders, type_selection).sum do |path|
+          puts path
           count_occurrences(path, pattern)
         end
       end
@@ -27,11 +28,13 @@ module Serum
             patterns << "#{@root}/#{folder}/**/*.#{extension}"
           end
         end
+        puts "Calling patterns: #{patterns}"
+        Dir[*patterns]
       end
 
       def count_occurrences(path, pattern)
         content = File.read(path) or raise "Could not read file: #{path}"
-        content.scan(pattern).size
+        content.scan(pattern).tap { |m| p m }.size
       end
 
     end
