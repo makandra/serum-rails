@@ -16,6 +16,14 @@ Since all you send us are a few numbers, we don't need to look at your code for 
 estimate. This saves us signing an NDA and giving us access to your repository before
 we even work together.
 
+### Prerequisites
+
+You need:
+
+- Ruby 1.8.7 or higher
+- A machine that can run the project you want to generate metrics for. `serum-rails` will call `bundle` and `rake`
+  inside your project directory, so make sure you have a `database.yml` and all dependencies installed.
+  If you can open a Rails console you should be good to go.
 
 ### Installation
 
@@ -36,5 +44,23 @@ serum-rails PATH_TO_YOUR_RAILS_APPLICATION
 ```
 
 `serum-rails` will scan the code of your application and output some code metric to the console.
+It should look like this:
+
+```
+time = 2014-09-04 11:25:44
+routes = 243
+file_accesses = 66
+controller_methods = 135
+mailer_invocations = 17
+uploaders = 5
+redirects = 33
+crypto_terms = 42
+json_outputs = 0
+cookie_accesses = 7
+yaml_inputs = 0
+unescaped_strings = 59
+lines_of_code = 42784
+gems = 154
+```
 
 Please e-mail the output to your security audit contact at makandra to continue the process.
