@@ -2,8 +2,6 @@ module Serum
   module Rails
     class Metrics
 
-      FRACTION_PRIVATE_CONTROLLER_METHODS = 0.2
-
       class << self
 
         attr_reader :metrics
@@ -29,14 +27,12 @@ module Serum
         )
       end
 
-      metric :controller_actions do
-        count = @app.count_lines(
+      metric :controller_methods do
+        @app.count_lines(
           :pattern => /\bdef\b/,
           :types => [:ruby],
           :folders => 'app/controllers'
         )
-        count *= (1 - FRACTION_PRIVATE_CONTROLLER_METHODS)
-        count.round
       end
 
       #metric :gem_count do
@@ -102,6 +98,14 @@ module Serum
 
       metric :lines_of_code do
         @app.lines_of_code
+      end
+
+      metric :routes do
+        @app.count_routes
+      end
+
+      metric :gems do
+        @app.count_gems
       end
 
       def to_hash

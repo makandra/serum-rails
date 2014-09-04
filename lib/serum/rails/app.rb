@@ -21,7 +21,27 @@ module Serum
 
       delegate :count_lines, :to => :code_scanner
 
+      def count_routes
+        Dir.chdir(@root) do
+          run_command('bundle exec rake routes').split(/\n/).size - 1
+        end
+      end
+
+      def count_gems
+        Dir.chdir(@root) do
+          run_command('bundle list').split(/\n/).size - 1
+        end
+      end
+
       private
+
+      def run_command(cmd)
+        Bundler.with_clean_env do
+          result = `#{cmd}`
+          $?.success? or raise "Error while running command: #{cmd}"
+          result
+        end
+      end
 
       def ensure_root_exists
         File.directory?(@root) or raise "Not a directory: #{@root}"
