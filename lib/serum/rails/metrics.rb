@@ -106,7 +106,7 @@ module Serum
 
       def to_hash
         hash = {}
-        self.class.metrics.sort.each do |metric|
+        self.class.metrics.sort_by(&:to_s).each do |metric|
           hash[metric] = send(metric)
         end
         hash
