@@ -4,17 +4,23 @@ module Serum
 
       FRACTION_PRIVATE_CONTROLLER_METHODS = 0.2
 
+      class << self
+
+        attr_reader :metrics
+
+        private
+
+        def metric(name, &block)
+          @metrics ||= []
+          @metrics << name
+          define_method name, &block
+        end
+
+      end
+
       def initialize(root)
         @app = App.new(root)
       end
-
-      def self.metric(name, &block)
-        @metrics ||= []
-        @metrics << name
-        define_method name, &block
-      end
-
-      private_class_method :metric
 
       metric :unescaped_strings do
         @app.count_lines(
@@ -100,7 +106,7 @@ module Serum
 
       def to_hash
         hash = {}
-        @metrics.sort.each do |metric|
+        self.class.metrics.sort.each do |metric|
           hash[metric] = send(metric)
         end
         hash

@@ -6,6 +6,8 @@ root = ARGV[0].presence || '.'
 
 metrics = Serum::Rails::Metrics.new(root)
 
+puts "time = #{Time.now.utc.to_s(:db)}"
+
 metrics.to_hash.each do |metric, value|
   puts "#{metric} = #{value}"
 end
