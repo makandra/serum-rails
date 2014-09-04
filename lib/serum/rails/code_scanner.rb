@@ -4,6 +4,7 @@ module Serum
 
       DEFAULT_FOLDERS = %w[app lib config public].freeze
       ANYTHING = /.*/.freeze
+      DEBUG = false
 
       def initialize(root)
         @root = root
@@ -11,10 +12,9 @@ module Serum
 
       def count_lines(options = {})
         pattern = options.fetch(:pattern, ANYTHING)
-        folders = options.fetch(:folders, DEFAULT_FOLDERS)
+        folders = Array.wrap(options.fetch(:folders, DEFAULT_FOLDERS))
         type_selection = TypeSelection.new(options[:types])
-        paths(folders, type_selection).sum do |path|
-          puts path
+        paths(folders, type_selection).sort.sum do |path|
           count_occurrences(path, pattern)
         end
       end
@@ -28,13 +28,20 @@ module Serum
             patterns << "#{@root}/#{folder}/**/*.#{extension}"
           end
         end
-        puts "Calling patterns: #{patterns}"
+        # puts "Calling patterns: #{patterns}"
         Dir[*patterns]
       end
 
       def count_occurrences(path, pattern)
         content = File.read(path) or raise "Could not read file: #{path}"
-        content.scan(pattern).tap { |m| p m }.size
+        #if path =~ /session_store/
+        #  puts "-----"
+        #  puts content
+        #  puts "-----"
+        #end
+        matches = content.scan(pattern)
+        matches.each { |match| puts "#{path}: #{match}" } if DEBUG
+        matches.size
       end
 
     end

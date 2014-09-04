@@ -2,6 +2,8 @@ module Serum
   module Rails
     class Metrics
 
+      FRACTION_PRIVATE_CONTROLLER_METHODS = 0.2
+
       def initialize(root)
         @app = App.new(root)
       end
@@ -22,11 +24,13 @@ module Serum
       end
 
       metric :controller_actions do
-        @app.count_lines(
+        count = @app.count_lines(
           :pattern => /\bdef\b/,
           :types => [:ruby],
           :folders => 'app/controllers'
         )
+        count *= (1 - FRACTION_PRIVATE_CONTROLLER_METHODS)
+        count.round
       end
 
       #metric :gem_count do
@@ -78,7 +82,8 @@ module Serum
       metric :json_outputs do
         @app.count_lines(
           :pattern => /\b(to_json|JSON\.generate|JSON\.dump)\b/,
-          :types => [:ruby, :views]
+          :types => [:ruby, :views],
+          :folders => 'app/views'
         )
       end
 
@@ -95,7 +100,7 @@ module Serum
 
       def to_hash
         hash = {}
-        metrics.sort.each do |metric|
+        @metrics.sort.each do |metric|
           hash[metric] = send(metric)
         end
         hash

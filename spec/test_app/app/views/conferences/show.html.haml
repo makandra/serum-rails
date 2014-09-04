@@ -73,3 +73,6 @@
               = link_to(icon(:attendee, current_user.name_for(attendee, attendee == @conference.user)), attendee)
             %td
               = current_user.email_for(attendee, attendee == @conference.user)
+
+:javascript
+  someFunction(#{JSON.dump(@some_var)})

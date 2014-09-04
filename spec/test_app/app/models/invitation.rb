@@ -31,4 +31,8 @@ class Invitation < ActiveRecord::Base
     true
   end
 
+  def self.import(path)
+    YAML.load(path)
+  end
+
 end

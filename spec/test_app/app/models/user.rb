@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   has_many :received_invitations, :class_name => 'Invitation', :foreign_key => 'recipient_id'
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
 
+  has_attached_file :avatar
+
 
   def sees_details_of?(other_user, force_visible = false)
     force_visible || self == other_user || friends_with?(other_user)
@@ -50,6 +52,10 @@ class User < ActiveRecord::Base
             :town => 'Nürnberg',
             :country => 'Germany',
             :role_name => 'admin'
+  end
+
+  def self.import(path)
+    YAML.load(path)
   end
 
 end
