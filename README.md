@@ -65,3 +65,7 @@ gems = 154
 ```
 
 Please e-mail the output to your security audit contact at makandra to continue the process.
+
+### Gem development 
+
+If you want to make changes to the `serum-rails` gem itself (not required for an audit), please see `DEVELOPMENT.md` in the project root for instructions.
