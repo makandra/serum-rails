@@ -36,10 +36,19 @@ module Serum
       private
 
       def run_command(cmd)
-        Bundler.with_clean_env do
+        with_clean_env do
           result = `#{cmd}`
           $?.success? or raise "Error while running command: #{cmd}"
           result
+        end
+      end
+
+      def with_clean_env(&block)
+        # Unlike RVM, rbenv does not auto-load Bundler for gem binaries. So.
+        if defined?(Bundler)
+          Bundler.with_clean_env(&block)
+        else
+          block.call
         end
       end
 
