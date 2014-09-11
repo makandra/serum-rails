@@ -21,6 +21,7 @@ we even work together.
 You need:
 
 - Ruby 1.8.7 or higher
+- [Bundler](http://bundler.io/)
 - A machine that can run the project you want to generate metrics for. `serum-rails` will call `bundle` and `rake`
   inside your project directory, so make sure you have a `database.yml` and all dependencies installed.
   If you can open a Rails console you should be good to go.
